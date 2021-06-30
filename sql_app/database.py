@@ -10,7 +10,7 @@ cloudinary.config(
     api_secret ="he5lFnOeoeRDBmV9z9QKCTxhLn0"
 )
 
-SQLALCHEMY_DATABASE_URL = "sqlite:///./sql_app2.db"
+#SQLALCHEMY_DATABASE_URL = "sqlite:///./sql_app2.db"
 SQLALCHEMY_DATABASE_URL = "postgresql://eqehnbihbtkmvy:c25ecd8c8e84970dd623a8d3f4be8e04aa16161f17a17ffea7b66b9245e58f12@ec2-54-162-119-125.compute-1.amazonaws.com:5432/daev0nklfg5klj"
 
 engine = create_engine(
