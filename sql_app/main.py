@@ -120,6 +120,64 @@ def post_detail(post_id:int,db: Session = Depends(get_db)):
     return {"post":post,"active_comment":active_comment}
 
 
+
+
+""" gRANHJAS """
+#REGION
+#Obtener una region por medio del id
+@app.get('/region/{reg_id}', response_model=schemas.Region)
+def read_region(reg_id: int, db: Session = Depends(get_db)):
+    db_region = crud.get_region(db, reg_id=reg_id)
+    return db_region
+
+#Obtener un listado de regions con un rango 0 - 100
+@app.get("/regions/", response_model=List[schemas.Region])
+def read_regions(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+    regions = crud.get_regions(db, skip=skip, limit=limit)
+    return regions
+
+#Agregar una region
+@app.post("/regions/", response_model=schemas.Region)
+def create_region(region: schemas.RegionCreate, db: Session = Depends(get_db)):
+    db_region = crud.create_region(db=db, region=region)
+
+    return db_region
+
+
+#Agreagr item
+
+#Agregar Granja sabiendo el id de la region
+@app.post("/farms/", response_model=schemas.Farm)
+def create_farm_for_region(
+    farm: schemas.FarmCreate, db: Session = Depends(get_db)
+):
+    return crud.create_region_farm(db=db, farm=farm)
+
+#Agregar un tipo de granja
+@app.post("/farm_type/", response_model=schemas.FarmType)
+def create_farm_type(farm_type: schemas.FarmTypeCreate, db: Session = Depends(get_db)):
+    db_farm_type = crud.create_farm_type(db=db, farm_type=farm_type)
+
+    return db_farm_type
+
+@app.post("/farm_visited/", response_model=schemas.FarmVisited)
+def create_farm_visited(farm_visited: schemas.FarmVisitedCreate, db: Session = Depends(get_db)):
+    db_farm_visited = crud.create_farm_visited(db=db, farm_visited=farm_visited)
+
+    return db_farm_visited
+
+@app.get("/farm_visited/", response_model=List[schemas.FarmVisited])
+def read_farm_visited(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+    farm_visited = crud.get_farm_visited(db, skip=skip, limit=limit)
+    return farm_visited
+
+
+@app.get("/farm_type/{farm_type_id}", response_model=schemas.FarmType)
+def read_farm_type(farm_type_id: int, db: Session = Depends(get_db)):
+    db_farm_type = crud.get_farm_type(db, farm_type_id=farm_type_id)
+    return db_farm_type
+
+
 # @app.post("/items/", response_model=schemas.Item)
 # def create_item_for_user(
 #     item: schemas.ItemCreate, db: Session = Depends(get_db)

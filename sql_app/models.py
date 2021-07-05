@@ -1,5 +1,7 @@
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String,DateTime
 from sqlalchemy.orm import relationship
+from sqlalchemy.sql.expression import text
+from sqlalchemy.sql.sqltypes import JSON, TIMESTAMP
 from sqlalchemy_utils import EmailType,URLType
 import datetime
 
@@ -32,7 +34,7 @@ class Post(Base):
     owner = relationship("User", back_populates="post")
     post_comment = relationship("Comment", back_populates="post_related")
 
-class   Comment(Base):
+class  Comment(Base):
 
     __tablename__ ="comments"
 
@@ -45,3 +47,50 @@ class   Comment(Base):
     post_id = Column(Integer,ForeignKey("posts.id"))
 
     post_related = relationship("Post" , back_populates="post_comment")
+
+
+""" Granjas """
+
+
+class FarmType(Base):
+        __tablename__ = 'farm_types'
+
+        frm_type_id = Column(Integer, primary_key=True, autoincrement=True)
+        frm_type_name = Column(String(45), nullable=False)
+        frm_type_created = Column(TIMESTAMP, nullable=False, server_default=text("CURRENT_TIMESTAMP"))
+        frm_type_enabled = Column(Integer, nullable=False, default="1")
+
+        
+class Region(Base):
+        __tablename__ = 'regions'
+
+        reg_id = Column(Integer, primary_key=True, nullable=False, autoincrement=True)
+        reg_name = Column(String(45), nullable=False)
+        reg_created = Column(TIMESTAMP, nullable=False, server_default=text("CURRENT_TIMESTAMP"))
+        reg_updated = Column(TIMESTAMP, nullable=True, server_default=text("CURRENT_TIMESTAMP"))
+        reg_enabled = Column(Integer, nullable=True,default="1")
+
+
+
+class Farm(Base):
+        __tablename__ = 'farms'
+
+        frm_id = Column(Integer, primary_key=True, unique=True, nullable=False, autoincrement=True)
+        frm_name = Column(String(45), nullable=False)
+        frm_restriction = Column(JSON)
+        frm_created = Column(TIMESTAMP, nullable=False, server_default=text("CURRENT_TIMESTAMP"))
+        frm_updated = Column(TIMESTAMP)
+        frm_enabled = Column(Integer, nullable=True, default="1")
+        FARM_TYPES_frm_id = Column(ForeignKey('farm_types.frm_type_id'), primary_key=True, nullable=False, index=True)
+        REGION_frm_id = Column(ForeignKey('regions.reg_id'), primary_key=True, nullable=False, index=True)
+        FARM_TYPES_frm = relationship('FarmType')
+        REGION_frm = relationship('Region')
+
+
+class FarmsVisited(Base):
+        __tablename__ = 'farms_visited'
+
+        frm_visited_id = Column(Integer, primary_key=True, nullable=False, autoincrement=True)
+        frm_visited_date = Column(TIMESTAMP, server_default=text("CURRENT_TIMESTAMP"))
+        FARM_frm_visited_id = Column(Integer, nullable=False, index=True)
+        USER_frm_visited_id = Column(Integer, nullable=False, index=True)
