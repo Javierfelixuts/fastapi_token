@@ -13,7 +13,7 @@ cloudinary.config(
 #SQLALCHEMY_DATABASE_URL = "sqlite:///./sql_app2.db" + connect_args={'check_same_thread': False}
 # ------ ON HEROKU APP -------
 
-SQLALCHEMY_DATABASE_URL = "postgresql://jjuenqlvmfmbaf:d9712a21a06a52faae9adc0524755ab2fdf2e22cb3f9736d6e66e3879cba2250@ec2-54-156-151-232.compute-1.amazonaws.com:5432/d3c1p7tkqdffbp"
+SQLALCHEMY_DATABASE_URL = "postgresql://bdksalnkzahrss:827e2ffea278f86697162d3ea2812ad2564649239d2dd8ad794e7dc5156a4a5a@ec2-44-195-16-34.compute-1.amazonaws.com:5432/danppcaab4viq0"
 
 #----- ON LOCAL MACHINE ----
 #SQLALCHEMY_DATABASE_URL = "postgresql://postgres:J8v5.f675@localhost/granjas_test1"
