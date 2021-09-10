@@ -1,7 +1,7 @@
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String,DateTime
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql.expression import text
-from sqlalchemy.sql.sqltypes import JSON, TIMESTAMP
+from sqlalchemy.sql.sqltypes import JSON, SMALLINT, TIMESTAMP
 from sqlalchemy_utils import EmailType,URLType
 import datetime
 
@@ -15,7 +15,10 @@ class User(Base):
     created_date = Column(DateTime,default=datetime.datetime.utcnow)
     email = Column(EmailType)
     username = Column(String, unique=True)
+    nombre = Column(String)
+    apellidos = Column(String)
     hashed_password = Column(String)
+    visible_farms = Column(JSON)
     is_active = Column(Boolean,default=True)
 
     post = relationship("Post", back_populates="owner")
@@ -81,10 +84,11 @@ class Farm(Base):
         frm_created = Column(TIMESTAMP, nullable=False, server_default=text("CURRENT_TIMESTAMP"))
         frm_updated = Column(TIMESTAMP)
         frm_enabled = Column(Integer, nullable=True, default="1")
-        FARM_TYPES_frm_id = Column(ForeignKey('farm_types.frm_type_id'), primary_key=True, nullable=False, index=True)
-        REGION_frm_id = Column(ForeignKey('regions.reg_id'), primary_key=True, nullable=False, index=True)
-        FARM_TYPES_frm = relationship('FarmType')
-        REGION_frm = relationship('Region')
+        farm_types_frm_id = Column(ForeignKey('farm_types.frm_type_id'), primary_key=True, nullable=False, index=True)
+        region_frm_id = Column(ForeignKey('regions.reg_id'), primary_key=True, nullable=False, index=True)
+        farm_types_frm = relationship('FarmType')
+        region_frm = relationship('Region')
+        
 
 
 class FarmsVisited(Base):
@@ -92,5 +96,9 @@ class FarmsVisited(Base):
 
         frm_visited_id = Column(Integer, primary_key=True, nullable=False, autoincrement=True)
         frm_visited_date = Column(TIMESTAMP, server_default=text("CURRENT_TIMESTAMP"))
-        FARM_frm_visited_id = Column(Integer, nullable=False, index=True)
-        USER_frm_visited_id = Column(Integer, nullable=False, index=True)
+        farm_frm_visited_id = Column(Integer, nullable=False, index=True)
+        user_frm_visited_id = Column(Integer, nullable=False, index=True)
+        frm_visited_quarantine_nights = Column(SMALLINT, nullable=False)
+        #variable para farms_visited se le agregan la cantidad de 1 a 4 dias maximo
+        frm_visited_quarentine_date = Column(String(45), nullable=False)
+        frm_visited_is_region = Column(SMALLINT, nullable=False)

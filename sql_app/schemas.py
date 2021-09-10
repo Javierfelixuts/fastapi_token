@@ -2,14 +2,18 @@ from typing import Optional
 from pydantic import BaseModel
 import datetime
 from fastapi import Body
+from sqlalchemy.sql.sqltypes import JSON
 
 
 """ gRANJAS"""
 #Farm Visited
 class FarmsVisitedBase(BaseModel):
     frm_visited_date : datetime.datetime
-    FARM_frm_visited_id: int
-    USER_frm_visited_id : int
+    frm_visited_quarantine_nights: int
+    farm_frm_visited_id: int
+    user_frm_visited_id : int
+    frm_visited_is_region: int
+
 
 class FarmVisitedCreate(FarmsVisitedBase):
     pass
@@ -18,6 +22,9 @@ class  FarmVisited(FarmsVisitedBase):
     frm_visited_id: int
     class Config:
         orm_mode = True
+
+
+
 #Farm
 class FarmBase(BaseModel):
     frm_name: str
@@ -25,12 +32,13 @@ class FarmBase(BaseModel):
 
 class FarmCreate(FarmBase):
     
-    FARM_TYPES_frm_id : int
-    REGION_frm_id: int
+    farm_types_frm_id : int
+    region_frm_id: int
 class Farm(FarmBase):
     frm_id: int
-    FARM_TYPES_frm_id : int
-    REGION_frm_id: int
+    farm_types_frm_id : int
+    frm_restriction: list = None
+    region_frm_id: int
 
     class Config:
         orm_mode = True
@@ -76,6 +84,8 @@ class TokenData(BaseModel):
 
 class User(BaseModel):
     username: str
+    nombre: str
+    apellidos: str
 
 class UserInDB(User):
     hashed_password: str

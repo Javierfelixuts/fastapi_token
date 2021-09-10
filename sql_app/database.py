@@ -11,8 +11,8 @@ cloudinary.config(
 )
 
 #SQLALCHEMY_DATABASE_URL = "sqlite:///./sql_app2.db" + connect_args={'check_same_thread': False}
-SQLALCHEMY_DATABASE_URL = "postgresql://tpijxvtyifqxwg:d5369183ba8301095bf3aa019811776a6e119d6c8da0f0c88256cce1ea4f9393@ec2-3-212-75-25.compute-1.amazonaws.com:5432/d347hqgn8ik60i"
-#SQLALCHEMY_DATABASE_URL = "postgresql://postgres:J8v5.f675@127.0.0.1:5432/granjas_tester"
+#SQLALCHEMY_DATABASE_URL = "postgresql://tpijxvtyifqxwg:d5369183ba8301095bf3aa019811776a6e119d6c8da0f0c88256cce1ea4f9393@ec2-3-212-75-25.compute-1.amazonaws.com:5432/d347hqgn8ik60i"
+SQLALCHEMY_DATABASE_URL = "postgresql://postgres:J8v5.f675@localhost/granjas_test1"
 
 engine = create_engine(
     SQLALCHEMY_DATABASE_URL,
