@@ -121,7 +121,7 @@ def get_farms_visited_by_user(db: Session, user_id : int):
 
 #Granjas, Typo de Granjas, Regiones
 def create_region_farm(db: Session, farm: schemas.FarmCreate):
-    db_farm = models.Farm(frm_name=farm.frm_name, farm_types_frm_id= farm.farm_types_frm_id, region_frm_id=farm.region_frm_id)
+    db_farm = models.Farm(frm_name=farm.frm_name, frm_restriction = farm.frm_restriction, farm_types_frm_id= farm.farm_types_frm_id, region_frm_id=farm.region_frm_id)
     db.add(db_farm)
     db.commit()
     db.refresh(db_farm)

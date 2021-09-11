@@ -29,6 +29,8 @@ class  FarmVisited(FarmsVisitedBase):
 class FarmBase(BaseModel):
     frm_name: str
     frm_created: datetime.datetime
+    frm_restriction: list = []
+
 
 class FarmCreate(FarmBase):
     
@@ -37,7 +39,6 @@ class FarmCreate(FarmBase):
 class Farm(FarmBase):
     frm_id: int
     farm_types_frm_id : int
-    frm_restriction: list = None
     region_frm_id: int
 
     class Config:
