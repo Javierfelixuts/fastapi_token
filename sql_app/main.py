@@ -22,7 +22,8 @@ origins = [
     "http://localhost:3000",
     "localhost:3000",
     "http://10.0.0.24:3000",
-    "http://monitoreo-granjas.ojaialimentos.mx"
+    "http://monitoreo-granjas.ojaialimentos.mx",
+    "https://monitoreo-granjas.ojaialimentos.mx"
 ]
 
 app.add_middleware(
