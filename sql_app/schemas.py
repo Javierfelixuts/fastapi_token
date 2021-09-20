@@ -87,6 +87,7 @@ class User(BaseModel):
     username: str
     nombre: str
     apellidos: str
+    visible_farms: list = []
 
 class UserInDB(User):
     hashed_password: str
