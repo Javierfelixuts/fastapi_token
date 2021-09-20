@@ -100,5 +100,5 @@ class FarmsVisited(Base):
         user_frm_visited_id = Column(Integer, nullable=False, index=True)
         frm_visited_quarantine_nights = Column(SMALLINT, nullable=False)
         #variable para farms_visited se le agregan la cantidad de 1 a 4 dias maximo
-        frm_visited_quarentine_date = Column(String(45), nullable=False)
+        frm_visited_quarentine_date = Column(TIMESTAMP, nullable=False, server_default=text("CURRENT_TIMESTAMP"))
         frm_visited_is_region = Column(SMALLINT, nullable=False)
