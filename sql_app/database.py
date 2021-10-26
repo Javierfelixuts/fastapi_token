@@ -17,6 +17,7 @@ SQLALCHEMY_DATABASE_URL = "postgresql://lruazgbimufqhz:d0706b73cba7e4f40e24773a3
 
 #----- ON LOCAL MACHINE ----
 #SQLALCHEMY_DATABASE_URL = "postgresql://postgres:J8v5.f675@localhost/granjas_test1"
+#SQLALCHEMY_DATABASE_URL = "postgresql://postgres:J8v5.f675@localhost/granjas_test1"
 
 engine = create_engine(
     SQLALCHEMY_DATABASE_URL,
