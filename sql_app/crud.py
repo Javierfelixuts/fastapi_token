@@ -18,6 +18,9 @@ from typing import Optional
 #     db.refresh(db_item)
 #     return db_item
 
+
+
+
 SECRET_KEY = "bfcaa24859af5279d4ec6c1de8f9d2624f6d819b020eba2bcd9fe0483af45ed3"
 ALGORITHM = "HS256"
 
@@ -126,6 +129,8 @@ def create_region_farm(db: Session, farm: schemas.FarmCreate):
     db.commit()
     db.refresh(db_farm)
     return db_farm
+
+
 
 def get_farms(db: Session, skip: int = 0, limit: int = 100):
 
