@@ -36,11 +36,12 @@ class FarmCreate(FarmBase):
     
     farm_types_frm_id : int
     region_frm_id: int
-    frm_enabled: int
+    
 class Farm(FarmBase):
     frm_id: int
     farm_types_frm_id : int
     region_frm_id: int
+    frm_enabled: int
 
     class Config:
         orm_mode = True
